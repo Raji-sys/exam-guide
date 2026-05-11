@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promotional Exam Study Guide</title>
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: #e2e0d8;
+    --text: #1a1917;
+    --muted: #6b6860;
+    --hint: #9b9890;
+    --accent: #2563eb;
+    --accent-light: #eff6ff;
+    --accent-text: #1d4ed8;
+    --green: #166534;
+    --green-bg: #f0fdf4;
+    --red: #991b1b;
+    --red-bg: #fef2f2;
+    --amber: #92400e;
+    --amber-bg: #fffbeb;
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  @media(prefers-color-scheme:dark){
+    :root{
+      --bg:#18181b;--surface:#27272a;--border:#3f3f46;
+      --text:#fafafa;--muted:#a1a1aa;--hint:#71717a;
+      --accent:#3b82f6;--accent-light:#1e3a5f;--accent-text:#93c5fd;
+      --green:#86efac;--green-bg:#14532d;--red:#fca5a5;--red-bg:#7f1d1d;
+      --amber:#fcd34d;--amber-bg:#78350f;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;min-height:100vh}
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.25rem;position:sticky;top:0;z-index:100}
+  .header-inner{max-width:700px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .header-title{font-size:16px;font-weight:600;color:var(--text)}
+  .header-sub{font-size:12px;color:var(--muted);margin-top:1px}
+  .countdown-pill{background:var(--red-bg);color:var(--red);font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap}
+  .tabs-wrap{background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tabs{max-width:700px;margin:0 auto;display:flex;padding:0 1.25rem}
+  .tab{padding:10px 16px;font-size:13px;font-weight:500;color:var(--muted);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all 0.15s}
+  .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .main{max-width:700px;margin:0 auto;padding:1rem 1.25rem 3rem}
+  .section{display:none}
+  .section.active{display:block}
+  .tip{background:var(--amber-bg);border-left:3px solid var(--amber);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:0.625rem 0.875rem;font-size:13px;color:var(--amber);margin-bottom:1rem}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:0.875rem;overflow:hidden}
+  .card-head{padding:0.625rem 1rem;background:var(--bg);border-bottom:1px solid var(--border);font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:6px;justify-content:space-between}
+  .badge{font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;text-transform:uppercase;letter-spacing:0.03em}
+  .badge-red{background:var(--red-bg);color:var(--red)}
+  .badge-green{background:var(--green-bg);color:var(--green)}
+  .badge-blue{background:var(--accent-light);color:var(--accent-text)}
+  .list-item{padding:8px 1rem;border-bottom:1px solid var(--border);font-size:14px;display:flex;gap:10px;align-items:flex-start}
+  .list-item:last-child{border-bottom:none}
+  .num{color:var(--hint);font-size:12px;min-width:20px;padding-top:1px;flex-shrink:0}
+  .list-item b{font-weight:600;color:var(--text)}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem;margin-bottom:0.875rem}
+  @media(max-width:500px){.two-col{grid-template-columns:1fr}}
+  .two-col .card{margin-bottom:0}
+  .info-box{padding:0.875rem 1rem;font-size:13px;line-height:1.7;color:var(--muted)}
+  .info-box b{color:var(--text)}
+  .qa-wrap{margin-bottom:0.875rem}
+  .qa-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem}
+  .qa-head-label{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+  .reveal-btn{font-size:12px;color:var(--accent);background:none;border:none;cursor:pointer;padding:2px 0}
+  .qa-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:6px;overflow:hidden}
+  .qa-q{padding:10px 1rem;font-size:14px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;user-select:none}
+  .qa-q:hover{background:var(--bg)}
+  .qa-arrow{font-size:16px;color:var(--hint);flex-shrink:0;transition:transform 0.2s;line-height:1}
+  .qa-a{font-size:13px;color:var(--muted);padding:0 1rem 10px;display:none;line-height:1.6}
+  .qa-a.show{display:block}
+  .qa-arrow.open{transform:rotate(180deg)}
+  .cat-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--hint);margin:1rem 0 0.375rem;padding:0 2px}
+  .section-break{height:1px;background:var(--border);margin:1.25rem 0}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th{text-align:left;padding:7px 10px;background:var(--bg);font-weight:600;font-size:12px;color:var(--muted);border-bottom:1px solid var(--border)}
+  td{padding:7px 10px;border-bottom:1px solid var(--border);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:500;color:var(--text)}
+  td:last-child{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-title">📋 Promotional Exam Study Guide</div>
+      <div class="header-sub">Civil Service + IT — Save this file, open anytime offline</div>
+    </div>
+    <div class="countdown-pill" id="cd">⏳ Loading...</div>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="show('appt')">Appointments</button>
+    <button class="tab" onclick="show('conduct')">Discipline</button>
+    <button class="tab" onclick="show('admin')">Admin Ops</button>
+    <button class="tab" onclick="show('current')">Current Affairs</button>
+    <button class="tab" onclick="show('it')">ICT</button>
+    <button class="tab" onclick="show('qa')">Q&amp;A Drill</button>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ===== APPOINTMENTS ===== -->
+<div id="appt" class="section active">
+  <div class="tip">💡 These are the most common promotional exam topics — know every list cold.</div>
+
+  <div class="card">
+    <div class="card-head">Types of appointment <span class="badge badge-red">exam fave</span></div>
+    <div class="list-item"><span class="num">1</span>Pupilage or Trainee appointment</div>
+    <div class="list-item"><span class="num">2</span>Probation appointment</div>
+    <div class="list-item"><span class="num">3</span>Contract appointment</div>
+    <div class="list-item"><span class="num">4</span>Temporary appointment</div>
+    <div class="list-item"><span class="num">5</span>Special appointment (e.g. NYSC)</div>
+    <div class="list-item"><span class="num">6</span>Permanent &amp; Pensionable appointment</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Conditions to be met by applicant</div>
+    <div class="list-item"><span class="num">1</span>Not less than 15 years and not above 50 years of age</div>
+    <div class="list-item"><span class="num">2</span>Have the minimum educational qualification specified for the post</div>
+    <div class="list-item"><span class="num">3</span>Medically fit</div>
+    <div class="list-item"><span class="num">4</span>Good conduct testimonial from last school or from employer</div>
+    <div class="list-item"><span class="num">5</span>Not convicted of a criminal offence</div>
+    <div class="list-item"><span class="num">6</span>No obligation to remain in former employment</div>
+    <div class="list-item"><span class="num">7</span>Certificate of origin from LGA of origin</div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Who can be on contract appointment</div>
+      <div class="list-item"><span class="num">1</span>Nigerian pensioner</div>
+      <div class="list-item"><span class="num">2</span>Nigerian who requests it</div>
+      <div class="list-item"><span class="num">3</span>Nigerian above 50 years at time of appointment</div>
+      <div class="list-item"><span class="num">4</span>An expatriate</div>
+      <div class="list-item"><span class="num">5</span>Non-Nigerian woman married to a Nigerian, not naturalized as citizen</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Criteria for promotion <span class="badge badge-red">key</span></div>
+      <div class="list-item"><span class="num">1</span>Must be confirmed</div>
+      <div class="list-item"><span class="num">2</span>Spent stipulated years on present level</div>
+      <div class="list-item"><span class="num">3</span>Vacancies available at a higher level</div>
+      <div class="list-item"><span class="num">4</span>Pass promotion interview</div>
+      <div class="list-item"><span class="num">5</span>No disciplinary action pending</div>
+      <div class="list-item"><span class="num">6</span>Good APER scores for minimum 2–4 years</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">APER — areas assessed (Annual Performance Evaluation Report)</div>
+    <div class="list-item"><span class="num">1</span>General ability</div>
+    <div class="list-item"><span class="num">2</span>Character trait</div>
+    <div class="list-item"><span class="num">3</span>Work habit</div>
+    <div class="list-item"><span class="num">4</span>Leadership attainment</div>
+    <div class="list-item"><span class="num">5</span>Target</div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Ways of leaving the service</div>
+      <div class="list-item"><span class="num">1</span>Retirement</div>
+      <div class="list-item"><span class="num">2</span>Termination</div>
+      <div class="list-item"><span class="num">3</span>Dismissal</div>
+      <div class="list-item"><span class="num">4</span>Withdrawal</div>
+      <div class="list-item"><span class="num">5</span>Death</div>
+      <div class="list-item"><span class="num">6</span>Resignation</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Conditions to retire from service</div>
+      <div class="list-item"><span class="num">1</span>Served for 35 years</div>
+      <div class="list-item"><span class="num">2</span>Attained 60 years of age</div>
+      <div class="list-item"><span class="num">3</span>Ill health grounds</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Staff categories</div>
+    <div class="list-item"><span class="num">a</span><div><b>Executive cadre</b> — little education, non-professional (A/L, OND etc.)</div></div>
+    <div class="list-item"><span class="num">b</span><div><b>Officer's cadre</b> — higher education, professional (1st degree, masters)</div></div>
+    <div class="list-item"><span class="num">c</span><div><b>Directors' cadre</b> — highly educated, experienced; they are policy makers in the ministry</div></div>
+    <div class="list-item"><span class="num">d</span><div><b>Common services</b> — little/no education, support roles (cleaners, messengers, cooks)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">National promotion — when given even on leave</div>
+    <div class="list-item"><span class="num">1</span>Officer on leave of absence</div>
+    <div class="list-item"><span class="num">2</span>Officer on secondment</div>
+    <div class="list-item"><span class="num">3</span>Officer on study leave</div>
+    <div class="list-item"><span class="num">4</span>Officer on approved special assignment</div>
+  </div>
+</div>
+
+<!-- ===== CONDUCT ===== -->
+<div id="conduct" class="section">
+  <div class="tip">💡 Distinguish serious misconduct from ordinary misconduct. Know all 11 disciplinary measures in order.</div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Disciplinary measures <span class="badge badge-red">know the order</span></div>
+      <div class="list-item"><span class="num">1</span>Compulsory retirement</div>
+      <div class="list-item"><span class="num">2</span>Termination</div>
+      <div class="list-item"><span class="num">3</span>Suspension</div>
+      <div class="list-item"><span class="num">4</span>Dismissal from service</div>
+      <div class="list-item"><span class="num">5</span>Warning</div>
+      <div class="list-item"><span class="num">6</span>Surcharge</div>
+      <div class="list-item"><span class="num">7</span>Loss of pay</div>
+      <div class="list-item"><span class="num">8</span>Demotion or rank reduction</div>
+      <div class="list-item"><span class="num">9</span>Interdiction</div>
+      <div class="list-item"><span class="num">10</span>Reprimand</div>
+      <div class="list-item"><span class="num">11</span>Deferred or withheld increment</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Acts of serious misconduct</div>
+      <div class="list-item"><span class="num">1</span>Disobedience of lawful order</div>
+      <div class="list-item"><span class="num">2</span>Drunkenness</div>
+      <div class="list-item"><span class="num">3</span>Financial embarrassment</div>
+      <div class="list-item"><span class="num">4</span>Not keeping proper records</div>
+      <div class="list-item"><span class="num">5</span>Conviction of criminal act</div>
+      <div class="list-item"><span class="num">6</span>Physical assaults</div>
+      <div class="list-item"><span class="num">7</span>Absent from duty without approval</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Acts of misconduct</div>
+      <div class="list-item"><span class="num">1</span>False claim against government</div>
+      <div class="list-item"><span class="num">2</span>Insubordination</div>
+      <div class="list-item"><span class="num">3</span>Fowl language</div>
+      <div class="list-item"><span class="num">4</span>Improper dressing</div>
+      <div class="list-item"><span class="num">5</span>Membership of secret cult</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Circumstances leading to dismissal</div>
+      <div class="list-item"><span class="num">1</span>Stealing</div>
+      <div class="list-item"><span class="num">2</span>Embezzlement</div>
+      <div class="list-item"><span class="num">3</span>Drunkenness</div>
+      <div class="list-item"><span class="num">4</span>Absenteeism</div>
+      <div class="list-item"><span class="num">5</span>Quarrelsomeness</div>
+      <div class="list-item"><span class="num">6</span>Chronic ill-health</div>
+      <div class="list-item"><span class="num">7</span>Doubtful integrity</div>
+      <div class="list-item"><span class="num">8</span>Gross indiscipline</div>
+      <div class="list-item"><span class="num">9</span>Unauthorized release of secret information</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Misconduct — full list</div>
+    <div class="list-item"><span class="num">1</span>Corruption</div>
+    <div class="list-item"><span class="num">2</span>Embezzlement</div>
+    <div class="list-item"><span class="num">3</span>Fighting on duty</div>
+    <div class="list-item"><span class="num">4</span>Financial embarrassment</div>
+    <div class="list-item"><span class="num">5</span>Negligence</div>
+    <div class="list-item"><span class="num">6</span>False claims against government</div>
+    <div class="list-item"><span class="num">7</span>Suppression of records</div>
+    <div class="list-item"><span class="num">8</span>Absent from duty without leave</div>
+    <div class="list-item"><span class="num">9</span>Conviction of criminal charges</div>
+    <div class="list-item"><span class="num">10</span>Trading without permission</div>
+    <div class="list-item"><span class="num">11</span>Unauthorized disclosure of official information</div>
+    <div class="list-item"><span class="num">12</span>Engaging in political activities</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Code of ethics (13)</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr">
+      <div class="list-item"><span class="num">1</span>Discipline</div>
+      <div class="list-item"><span class="num">2</span>Loyalty</div>
+      <div class="list-item"><span class="num">3</span>Honesty</div>
+      <div class="list-item"><span class="num">4</span>Industriousness</div>
+      <div class="list-item"><span class="num">5</span>Courage</div>
+      <div class="list-item"><span class="num">6</span>Good conduct</div>
+      <div class="list-item"><span class="num">7</span>Helpfulness</div>
+      <div class="list-item"><span class="num">8</span>Secrecy of official documents &amp; information</div>
+      <div class="list-item"><span class="num">9</span>Co-operation</div>
+      <div class="list-item"><span class="num">10</span>Prudence</div>
+      <div class="list-item"><span class="num">11</span>National consciousness</div>
+      <div class="list-item"><span class="num">12</span>Tidiness</div>
+      <div class="list-item"><span class="num">13</span>Tact &amp; skillfulness</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Suspension — definition</div>
+    <div class="info-box">When a <b>prima facie case</b> of criminal offence is established against an officer and it is in public interest, the officer ceases to perform duties and salary is stopped until the disciplinary committee gives final judgment. If found <b>not guilty</b>, salary arrears are fully paid.</div>
+  </div>
+</div>
+
+<!-- ===== ADMIN OPS ===== -->
+<div id="admin" class="section">
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Duty tour allowance granted to</div>
+      <div class="list-item"><span class="num">1</span>New employee resuming from abroad</div>
+      <div class="list-item"><span class="num">2</span>Old employee resuming at new station on transfer/posting</div>
+      <div class="list-item"><span class="num">3</span>Staff on official duty outside his station</div>
+      <div class="list-item"><span class="num">4</span>Staff attending training/workshop away from station</div>
+      <div class="list-item"><span class="num">5</span>New employee resuming outside ministry HQ and place of birth</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Advances granted civil servant</div>
+      <div class="list-item"><span class="num">1</span>Salary advance</div>
+      <div class="list-item"><span class="num">2</span>Touring advance</div>
+      <div class="list-item"><span class="num">3</span>Housing loan</div>
+      <div class="list-item"><span class="num">4</span>Car loan</div>
+      <div class="list-item"><span class="num">5</span>Three months salary advance</div>
+      <div class="list-item"><span class="num">6</span>Personal</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Types of leave</div>
+      <div class="list-item"><span class="num">a</span>Annual</div>
+      <div class="list-item"><span class="num">b</span>Maternity</div>
+      <div class="list-item"><span class="num">c</span>Sabbatical</div>
+      <div class="list-item"><span class="num">d</span>Casual</div>
+      <div class="list-item"><span class="num">e</span>Examination</div>
+      <div class="list-item"><span class="num">f</span>Sports / Cultural activities</div>
+      <div class="list-item"><span class="num">g</span>Terminal</div>
+      <div class="list-item"><span class="num">h</span>Special</div>
+      <div class="list-item"><span class="num">i</span>Leave of absence</div>
+      <div class="list-item"><span class="num">+</span>Paternity <span class="badge badge-green" style="margin-left:4px">added</span></div>
+    </div>
+    <div class="card">
+      <div class="card-head">Documents in officer's file</div>
+      <div class="list-item"><span class="num">1</span>Bio-data</div>
+      <div class="list-item"><span class="num">2</span>Letter of appointment</div>
+      <div class="list-item"><span class="num">3</span>Curriculum vitae</div>
+      <div class="list-item"><span class="num">4</span>Medical certificate of fitness</div>
+      <div class="list-item"><span class="num">5</span>Assumption/resumption of duty certificate</div>
+      <div class="list-item"><span class="num">6</span>Letter of acceptance of appointment offer</div>
+      <div class="list-item"><span class="num">7</span>Record of service forms</div>
+      <div class="list-item"><span class="num">8</span>Birth certificate</div>
+      <div class="list-item"><span class="num">9</span>Certificate of origin</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Transfer vs posting vs secondment <span class="badge badge-red">trick question</span></div>
+    <div class="info-box">
+      <b>Transfer:</b> PERMANENT release of officer from one service to another within the same service. Not for a specific period.<br><br>
+      <b>Posting:</b> TEMPORARY deployment of officer from one office to another or from one ministry to another.<br><br>
+      <b>Secondment:</b> Temporary release of officer to the services of ANOTHER government or agency for a specific period.<br><br>
+      <b>Misconduct:</b> A willful act or improper behavior which can be investigated.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Types of transfer</div>
+    <div class="list-item"><span class="num">1</span><div><b>Inter-service</b> — between federal establishments (e.g. Federal Railway to Federal Ministry of Education)</div></div>
+    <div class="list-item"><span class="num">2</span><div><b>Inter-ministerial</b> — from one ministry to another (e.g. Federal Ministry of Education to Defense)</div></div>
+    <div class="list-item"><span class="num">3</span><div><b>Inter-department</b> — from one department to another (e.g. library to teaching)</div></div>
+    <div class="list-item"><span class="num">4</span><div><b>Inter-cadre</b> — from one cadre to another due to additional certificate (e.g. Executive to Professional cadre)</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Info needed for gratuity &amp; pension</div>
+      <div class="list-item"><span class="num">1</span>Letter of first appointment</div>
+      <div class="list-item"><span class="num">2</span>Letter from retiree</div>
+      <div class="list-item"><span class="num">3</span>Gazette of confirmation</div>
+      <div class="list-item"><span class="num">4</span>Letter of last promotion</div>
+      <div class="list-item"><span class="num">5</span>Last pay certificate</div>
+      <div class="list-item"><span class="num">6</span>Certified record of service</div>
+      <div class="list-item"><span class="num">7</span>Certificate of clearance of indebtedness from accounts dept</div>
+      <div class="list-item"><span class="num">8</span>Letter of retirement</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Means of communication</div>
+      <div class="list-item"><span class="num">i</span>Television</div>
+      <div class="list-item"><span class="num">ii</span>Radio</div>
+      <div class="list-item"><span class="num">iii</span>Telecommunication</div>
+      <div class="list-item"><span class="num">iv</span>Letters</div>
+      <div class="list-item"><span class="num">v</span>Circulars</div>
+      <div class="list-item"><span class="num">vi</span>Meetings</div>
+      <div class="list-item"><span class="num">vii</span>Minutes</div>
+      <div class="list-item"><span class="num">viii</span>Newspapers</div>
+      <div class="list-item"><span class="num">ix</span>Manuals</div>
+      <div class="list-item"><span class="num">x</span>Memorandum</div>
+      <div class="list-item"><span class="num">xi</span>Endorsement</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Civil Service motto &amp; logo colours</div>
+    <div class="info-box"><b>Motto:</b> Service · Loyalty · Excellence<br><b>Logo colours:</b> Blue, White, Green, White, Green<br><b>Decree:</b> A law made by military regime &nbsp;|&nbsp; <b>Edict:</b> State law made by military</div>
+  </div>
+</div>
+
+<!-- ===== CURRENT AFFAIRS ===== -->
+<div id="current" class="section">
+  <div class="tip">💡 Verified from April 2026 PDF. Roles highlighted in red can change — confirm the night before.</div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">Key federal officials <span class="badge badge-red">verify</span></div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">President</span>Bola Ahmed Tinubu</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">VP</span>Kashim Shettima</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">SGF</span>George Akume</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">COS</span>Femi Gbajabiamila</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">CJN</span>Justice Kudirat Kekere-Ekun</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">IGP</span>Olatunji Disu</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">CBN Gov.</span>Dr Olayemi Cardoso</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">EFCC</span>Olanipekun Olukoyede</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">NNPC MD</span>Bashir Bayo Ojulari</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">INEC</span>Prof. Joash Ojo Amupitan</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">NAFDAC</span>Mojisola Adeyeye</div>
+    </div>
+    <div class="card">
+      <div class="card-head">Legislature &amp; military</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Sen. Pres.</span>Godswill Akpabio</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Dep. SP</span>Barau Jibrin</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Speaker</span>Tajudeen Abbas</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Min. Finance</span>Taiwo Oyedele</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Min. FCT</span>Nyesom Wike</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Min. Edu.</span>Dr Maruf Tunji Alausa</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Def. Staff</span>Gen. Olufemi Oluyede</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Army</span>Lt Gen. Waidi Shaibu</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Navy</span>V/Adm. Idi Abbas</div>
+      <div class="list-item"><span class="num" style="min-width:52px;font-size:11px">Air Force</span>AM Sunday Aneke</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Nigerian firsts — high-yield</div>
+    <table>
+      <tr><td>1st President</td><td>Dr Nnamdi Azikiwe</td></tr>
+      <tr><td>1st Prime Minister</td><td>Alhaji Abubakar Tafawa Balewa</td></tr>
+      <tr><td>1st Executive President</td><td>Alhaji Shehu Shagari</td></tr>
+      <tr><td>1st Military HoS</td><td>Gen. Aguiyi-Ironsi</td></tr>
+      <tr><td>1st IGP (indigenous)</td><td>Louis Edet</td></tr>
+      <tr><td>1st IGP (overall)</td><td>C.W. Duncan (1930)</td></tr>
+      <tr><td>1st Nobel Prize</td><td>Wole Soyinka (Literature)</td></tr>
+      <tr><td>1st Grammy (female)</td><td>Sade Adu</td></tr>
+      <tr><td>1st Grammy (male original)</td><td>Burna Boy (Damini Ogulu)</td></tr>
+      <tr><td>1st Female Governor</td><td>Virginia Etiaba, Anambra</td></tr>
+      <tr><td>1st Female CJN</td><td>Mariam Aloma Mukhtar</td></tr>
+      <tr><td>Named Nigeria</td><td>Flora Shaw</td></tr>
+      <tr><td>Flag designer</td><td>Michael Taiwo Akinkunmi</td></tr>
+      <tr><td>Father of Nigerian nationalism</td><td>Herbert Macaulay</td></tr>
+      <tr><td>Amalgamation (1914)</td><td>Lord Frederick Lugard</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-head">Key dates &amp; numbers</div>
+    <table>
+      <tr><td>Independence</td><td>October 1, 1960</td></tr>
+      <tr><td>Republic</td><td>October 1, 1963</td></tr>
+      <tr><td>First coup</td><td>1966</td></tr>
+      <tr><td>Naira introduced</td><td>January 1, 1973</td></tr>
+      <tr><td>FCT created</td><td>February 3, 1976</td></tr>
+      <tr><td>Democracy Day</td><td>June 12</td></tr>
+      <tr><td>Oil discovered (Oloibiri)</td><td>1956</td></tr>
+      <tr><td>Total LGAs</td><td>774</td></tr>
+      <tr><td>Senators</td><td>109</td></tr>
+      <tr><td>HoR members</td><td>360</td></tr>
+      <tr><td>Supreme Court max</td><td>21 (CJN + 20 justices)</td></tr>
+      <tr><td>Geopolitical zones</td><td>6</td></tr>
+      <tr><td>Min. wage (2024)</td><td>₦70,000/month</td></tr>
+      <tr><td>ECOWAS founded</td><td>1975 (HQ: Abuja)</td></tr>
+      <tr><td>Largest state (land)</td><td>Niger State</td></tr>
+      <tr><td>Most LGAs</td><td>Kano State — 44</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== ICT ===== -->
+<div id="it" class="section">
+  <div class="tip">💡 Each topic below maps directly to a question in your PDF. Know 5 points for each — exams rarely ask for more.</div>
+
+  <div class="card">
+    <div class="card-head">1. Five uses of ICT in healthcare</div>
+    <div class="list-item"><span class="num">1</span><div><b>Electronic Health Records (EHR)</b> — storing and managing patient data digitally</div></div>
+    <div class="list-item"><span class="num">2</span><div><b>Telemedicine</b> — remote consultations between doctors and patients via video calls</div></div>
+    <div class="list-item"><span class="num">3</span><div><b>Medical Imaging</b> — digital X-rays, MRI scans, CT scans processed by computers</div></div>
+    <div class="list-item"><span class="num">4</span><div><b>Online Pharmacy Systems</b> — managing and dispensing medications electronically</div></div>
+    <div class="list-item"><span class="num">5</span><div><b>Health Monitoring Devices</b> — wearables and sensors that track patient vitals in real time</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">2. Five duties of ICT support staff</div>
+    <div class="list-item"><span class="num">1</span>Installing, configuring, and maintaining hardware and software</div>
+    <div class="list-item"><span class="num">2</span>Troubleshooting and resolving technical issues for users</div>
+    <div class="list-item"><span class="num">3</span>Managing network infrastructure and internet connectivity</div>
+    <div class="list-item"><span class="num">4</span>Ensuring data backup and cybersecurity measures are in place</div>
+    <div class="list-item"><span class="num">5</span>Training staff on how to use ICT tools and systems</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">3. Five benefits of electronic record systems</div>
+    <div class="list-item"><span class="num">1</span><div><b>Easy Access</b> — records can be retrieved quickly from anywhere</div></div>
+    <div class="list-item"><span class="num">2</span><div><b>Reduced Paperwork</b> — saves physical storage space and reduces clutter</div></div>
+    <div class="list-item"><span class="num">3</span><div><b>Data Security</b> — records can be encrypted and access-controlled</div></div>
+    <div class="list-item"><span class="num">4</span><div><b>Accuracy</b> — reduces errors caused by illegible handwriting</div></div>
+    <div class="list-item"><span class="num">5</span><div><b>Efficient Sharing</b> — records can be shared instantly across departments or locations</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">4. Five characteristics of a strong password</div>
+      <div class="list-item"><span class="num">1</span><div><b>Length</b> — at least 8–12 characters</div></div>
+      <div class="list-item"><span class="num">2</span><div><b>Complexity</b> — upper, lower, numbers, special chars</div></div>
+      <div class="list-item"><span class="num">3</span><div><b>Unpredictability</b> — not based on personal info</div></div>
+      <div class="list-item"><span class="num">4</span><div><b>Uniqueness</b> — not reused across accounts</div></div>
+      <div class="list-item"><span class="num">5</span><div><b>Regularly Updated</b> — changed periodically</div></div>
+    </div>
+    <div class="card">
+      <div class="card-head">5. Five ways to protect a computer system</div>
+      <div class="list-item"><span class="num">1</span><div><b>Antivirus Software</b> — detects and removes malware</div></div>
+      <div class="list-item"><span class="num">2</span><div><b>Firewall</b> — monitors incoming/outgoing traffic</div></div>
+      <div class="list-item"><span class="num">3</span><div><b>Software Updates</b> — patches security vulnerabilities</div></div>
+      <div class="list-item"><span class="num">4</span><div><b>Strong Passwords &amp; 2FA</b> — prevents unauthorized access</div></div>
+      <div class="list-item"><span class="num">5</span><div><b>Data Backups</b> — ensures recovery after attack/failure</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">6. Five networking devices</div>
+    <table>
+      <thead><tr><th>Device</th><th>Function</th></tr></thead>
+      <tr><td>Router</td><td>Connects multiple networks and directs data traffic</td></tr>
+      <tr><td>Switch</td><td>Connects devices within a local network (LAN)</td></tr>
+      <tr><td>Hub</td><td>Broadcasts data to all devices on a network</td></tr>
+      <tr><td>Modem</td><td>Converts digital signals for internet transmission</td></tr>
+      <tr><td>Access Point</td><td>Provides wireless (Wi-Fi) connectivity</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-head">7. Five wireless communication technologies</div>
+    <div class="list-item"><span class="num">1</span><div><b>Wi-Fi</b> — wireless internet via radio waves</div></div>
+    <div class="list-item"><span class="num">2</span><div><b>Bluetooth</b> — short-range device-to-device communication</div></div>
+    <div class="list-item"><span class="num">3</span><div><b>4G/5G</b> — mobile broadband for smartphones and devices</div></div>
+    <div class="list-item"><span class="num">4</span><div><b>NFC</b> — very short-range (e.g. contactless payments)</div></div>
+    <div class="list-item"><span class="num">5</span><div><b>Satellite Communication</b> — long-range via orbiting satellites</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">8. Five causes of computer failure</div>
+    <div class="list-item"><span class="num">1</span><div><b>Overheating</b> — blocked vents, dust buildup, failed cooling fans</div></div>
+    <div class="list-item"><span class="num">2</span><div><b>Power Surges</b> — sudden voltage spikes from lightning or unstable supply</div></div>
+    <div class="list-item"><span class="num">3</span><div><b>Malware/Virus Infections</b> — corrupt critical system files, cause crashes</div></div>
+    <div class="list-item"><span class="num">4</span><div><b>Hard Drive Failure</b> — physical damage or logical corruption (bad sectors)</div></div>
+    <div class="list-item"><span class="num">5</span><div><b>Human Error</b> — accidental deletion, wrong settings, improper shutdowns</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head">9. Five examples of storage devices</div>
+      <div class="list-item"><span class="num">1</span>Hard Disk Drive (HDD)</div>
+      <div class="list-item"><span class="num">2</span>Solid State Drive (SSD)</div>
+      <div class="list-item"><span class="num">3</span>USB Flash Drive (Pen Drive)</div>
+      <div class="list-item"><span class="num">4</span>Memory Card (SD Card)</div>
+      <div class="list-item"><span class="num">5</span>Optical Disc (CD/DVD/Blu-ray)</div>
+    </div>
+    <div class="card">
+      <div class="card-head">10. Five MS Office applications</div>
+      <div class="list-item"><span class="num">Word</span>Word processing — documents, letters, reports</div>
+      <div class="list-item"><span class="num">Excel</span>Spreadsheets — calculations, data analysis, charts</div>
+      <div class="list-item"><span class="num">PowerPoint</span>Creating presentations and slideshows</div>
+      <div class="list-item"><span class="num">Access</span>Database management</div>
+      <div class="list-item"><span class="num">Outlook</span>Email management and scheduling</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">11. Five causes of poor network connection</div>
+    <div class="list-item"><span class="num">1</span><div><b>Distance from router</b> — further = weaker signal; walls reduce it further</div></div>
+    <div class="list-item"><span class="num">2</span><div><b>Network congestion</b> — too many users sharing bandwidth at peak hours</div></div>
+    <div class="list-item"><span class="num">3</span><div><b>Faulty cables or hardware</b> — damaged Ethernet cables, failing routers/switches</div></div>
+    <div class="list-item"><span class="num">4</span><div><b>Interference</b> — microwaves, cordless phones, neighboring Wi-Fi networks</div></div>
+    <div class="list-item"><span class="num">5</span><div><b>Outdated network drivers</b> — old/corrupted drivers cause poor or no connectivity</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">12. Five methods of online communication</div>
+    <div class="list-item"><span class="num">1</span><div><b>Email</b> — sending electronic messages (Gmail, Outlook)</div></div>
+    <div class="list-item"><span class="num">2</span><div><b>Instant Messaging/Chat</b> — real-time text (WhatsApp, Telegram)</div></div>
+    <div class="list-item"><span class="num">3</span><div><b>Video Conferencing</b> — live video calls (Zoom, Google Meet)</div></div>
+    <div class="list-item"><span class="num">4</span><div><b>Social Media</b> — platforms like Facebook, Twitter, Instagram</div></div>
+    <div class="list-item"><span class="num">5</span><div><b>VoIP</b> — internet-based voice calls (Skype, WhatsApp calls)</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">13. Steps — clearing DNS cache on Windows</div>
+    <div class="list-item"><span class="num">1</span>Click Start menu → type <b>CMD</b> in search bar</div>
+    <div class="list-item"><span class="num">2</span>Right-click Command Prompt → <b>Run as Administrator</b> (required)</div>
+    <div class="list-item"><span class="num">3</span>Type exactly: <b>ipconfig /flushdns</b></div>
+    <div class="list-item"><span class="num">4</span>Press Enter</div>
+    <div class="list-item"><span class="num">5</span>Confirmation message: "Successfully flushed the DNS Resolver Cache" appears</div>
+    <div class="info-box" style="font-size:12px">Note: Applies to Windows 8, 10, and 11. Requires admin rights or it will fail.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">14. Steps — computer refuses to boot</div>
+    <div class="list-item"><span class="num">1</span><b>Check power supply</b> — confirm cable is properly plugged in and outlet works</div>
+    <div class="list-item"><span class="num">2</span><b>Listen for beep codes</b> — BIOS beep patterns identify specific hardware faults</div>
+    <div class="list-item"><span class="num">3</span><b>Boot in Safe Mode</b> — Win 10/11: hold Shift + Restart → Troubleshoot → Advanced → Startup Settings</div>
+    <div class="list-item"><span class="num">4</span><b>Check hardware</b> — reseat RAM sticks, hard drive connectors, GPU</div>
+    <div class="list-item"><span class="num">5</span><b>Use Startup Repair</b> — boot from Windows USB/DVD → Repair your computer</div>
+  </div>
+
+  <div class="card">
+    <div class="card-head">15. Steps — system cannot connect to internet</div>
+    <div class="list-item"><span class="num">1</span><b>Isolate the problem</b> — is it one device or all? One device = local issue</div>
+    <div class="list-item"><span class="num">2</span><b>Check physical connections</b> — LAN cable plugged in? Wi-Fi on and connected?</div>
+    <div class="list-item"><span class="num">3</span><b>Restart router and modem</b> — unplug, wait 30 seconds, plug back in</div>
+    <div class="list-item"><span class="num">4</span><b>Run Network Troubleshooter</b> — Settings → Network &amp; Internet → Troubleshoot</div>
+    <div class="list-item"><span class="num">5</span><b>Check IP/DNS settings</b> — ensure set to obtain address automatically (DHCP)</div>
+    <div class="list-item"><span class="num">6</span><b>Flush DNS &amp; reset TCP/IP</b> — CMD as Admin: <b>ipconfig /flushdns</b> then <b>netsh int ip reset</b></div>
+  </div>
+</div>
+
+<!-- ===== Q&A DRILL ===== -->
+<div id="qa" class="section">
+  <div class="qa-head">
+    <span class="qa-head-label">50 exam-style questions — tap to reveal</span>
+    <button class="reveal-btn" onclick="revealAll()">Show all answers</button>
+  </div>
+
+  <div class="cat-label">Civil Service — Appointments &amp; Promotion</div>
+  <div id="qa-list-cs"></div>
+  <div class="cat-label">Civil Service — Discipline &amp; Conduct</div>
+  <div id="qa-list-disc"></div>
+  <div class="cat-label">Civil Service — Admin &amp; Definitions</div>
+  <div id="qa-list-admin"></div>
+  <div class="cat-label">Current Affairs</div>
+  <div id="qa-list-ca"></div>
+  <div class="cat-label">ICT</div>
+  <div id="qa-list-ict"></div>
+</div>
+
+</div><!-- /main -->
+
+<script>
+const qGroups = {
+  'qa-list-cs': [
+    ["How many types of appointment exist in the civil service?","6 — Pupilage/Trainee, Probation, Contract, Temporary, Special (NYSC), Permanent & Pensionable"],
+    ["What is the minimum age requirement for civil service appointment?","Not less than 15 years and not above 50 years"],
+    ["List any 4 conditions to be met by a civil service applicant","Medically fit; minimum educational qualification; good conduct testimonial; not convicted of criminal offence; certificate of origin from LGA; no obligation to remain in former employment"],
+    ["Who can be placed on contract appointment? (name 3)","Nigerian pensioner; Nigerian who requests it; Nigerian above 50 years; expatriate; Non-Nigerian woman married to a Nigerian not naturalized as citizen"],
+    ["List the 6 criteria for promotion","Must be confirmed; spent stipulated years on level; vacancies available; pass promotion interview; no disciplinary action pending; good APER scores for 2–4 years"],
+    ["What does APER stand for?","Annual Performance Evaluation Report"],
+    ["What are the 5 areas assessed in APER?","General ability, Character trait, Work habit, Leadership attainment, Target"],
+    ["List the 6 ways of leaving the civil service","Retirement, Termination, Dismissal, Withdrawal, Death, Resignation"],
+    ["What are the 3 conditions for retirement from service?","Served 35 years OR attained 60 years of age OR ill health grounds"],
+    ["Name the 4 staff categories in the civil service","Executive cadre, Officer's cadre, Directors' cadre, Common services"],
+    ["What officers receive national promotion even while away from post?","Officers on leave of absence, secondment, study leave, or approved special assignment"],
+  ],
+  'qa-list-disc': [
+    ["List all 11 disciplinary measures in order","Compulsory retirement, Termination, Suspension, Dismissal, Warning, Surcharge, Loss of pay, Demotion/rank reduction, Interdiction, Reprimand, Deferred/withheld increment"],
+    ["What is suspension?","Prima facie case of criminal offence established; officer stops work and salary is stopped until disciplinary committee rules. If found not guilty, salary arrears are paid."],
+    ["List 5 acts of serious misconduct","Disobedience of lawful order, Drunkenness, Financial embarrassment, Not keeping proper records, Conviction of criminal act, Physical assaults, Absent without approval (any 5)"],
+    ["List 5 acts of misconduct","False claim against government, Insubordination, Fowl language, Improper dressing, Membership of secret cult"],
+    ["List the 12 types of misconduct","Corruption, Embezzlement, Fighting on duty, Financial embarrassment, Negligence, False claims against govt, Suppression of records, Absent without leave, Conviction of criminal charges, Trading without permission, Unauthorized disclosure of information, Engaging in political activities"],
+    ["What circumstances can lead to dismissal? (name 5)","Stealing, Embezzlement, Drunkenness, Absenteeism, Quarrelsomeness, Chronic ill-health, Doubtful integrity, Gross indiscipline, Unauthorized release of secret information"],
+    ["List the 13 items in the code of ethics","Discipline, Loyalty, Honesty, Industriousness, Courage, Good conduct, Helpfulness, Secrecy of official documents, Co-operation, Prudence, National consciousness, Tidiness, Tact & skillfulness"],
+    ["What is misconduct?","A willful act or improper behavior which can be investigated"],
+  ],
+  'qa-list-admin': [
+    ["What is the difference between transfer and posting?","Transfer = PERMANENT release from one service to another. Posting = TEMPORARY deployment from one office/ministry to another."],
+    ["What is secondment?","Temporary release of an officer to the services of ANOTHER government or agency for a specific period"],
+    ["What is a Decree? What is an Edict?","Decree = law made by military regime. Edict = state law made by the military."],
+    ["List the 4 types of transfer","Inter-service, Inter-ministerial, Inter-department, Inter-cadre"],
+    ["List the types of leave (at least 8)","Annual, Maternity, Sabbatical, Casual, Examination, Sports/Cultural, Terminal, Special, Leave of absence, Paternity"],
+    ["List 5 advances granted to civil servants","Salary advance, Touring advance, Housing loan, Car loan, Three months salary advance, Personal"],
+    ["List 5 duty tour allowance recipients","New employee resuming from abroad; old employee resuming at new station on transfer; staff on official duty outside station; staff attending training away from station; new employee resuming outside ministry HQ and place of birth"],
+    ["List 5 documents that must be in an officer's file","Bio-data, Letter of appointment, Curriculum vitae, Medical certificate of fitness, Assumption of duty certificate, Letter of acceptance, Record of service forms, Birth certificate, Certificate of origin"],
+    ["What info is needed to compute gratuity and pension? (name 5)","Letter of first appointment, Letter from retiree, Gazette of confirmation, Letter of last promotion, Last pay certificate, Certified record of service, Certificate of clearance from accounts dept, Letter of retirement"],
+    ["What is the civil service motto?","Service, Loyalty, Excellence"],
+    ["What are the colours of the civil service logo?","Blue, White, Green, White, Green"],
+  ],
+  'qa-list-ca': [
+    ["Who is the current President of Nigeria?","Bola Ahmed Tinubu"],
+    ["Who is the current Chief Justice of Nigeria (CJN)?","Justice Kudirat Kekere-Ekun"],
+    ["Who is the current Inspector General of Police?","Olatunji Disu"],
+    ["Who is the current CBN Governor?","Dr Olayemi Cardoso"],
+    ["Who is the current Senate President?","Godswill Obot Akpabio"],
+    ["Who is the current Speaker, House of Representatives?","Tajudeen Abbas"],
+    ["Who is the current EFCC Chairman?","Olanipekun Olukoyede"],
+    ["Who was Nigeria's first President?","Dr Nnamdi Azikiwe"],
+    ["Who was Nigeria's first and only Prime Minister?","Alhaji Abubakar Tafawa Balewa"],
+    ["Who was Nigeria's first Military Head of State?","General Aguiyi-Ironsi"],
+    ["Who named Nigeria?","Flora Shaw"],
+    ["Who designed the Nigerian flag?","Michael Taiwo Akinkunmi"],
+    ["Who is regarded as the father of Nigerian nationalism?","Herbert Macaulay"],
+    ["When did Nigeria gain independence?","October 1, 1960"],
+    ["When did Nigeria become a republic?","October 1, 1963"],
+    ["When was the Nigerian Naira introduced?","January 1, 1973"],
+    ["How many LGAs does Nigeria have?","774"],
+    ["What state has the most LGAs?","Kano State — 44 LGAs"],
+    ["What is Nigeria's national minimum wage (2024)?","₦70,000 per month"],
+    ["What does the white on the Nigerian flag represent?","Peace"],
+    ["What does the eagle in the coat of arms represent?","Strength"],
+    ["When was ECOWAS founded?","1975"],
+    ["What is Nigeria's Democracy Day?","June 12"],
+  ],
+  'qa-list-ict': [
+    ["List 5 uses of ICT in healthcare","Electronic Health Records, Telemedicine, Medical Imaging, Online Pharmacy Systems, Health Monitoring Devices"],
+    ["List 5 duties of ICT support staff","Installing/configuring hardware & software; troubleshooting technical issues; managing network infrastructure; ensuring data backup & cybersecurity; training staff on ICT tools"],
+    ["List 5 benefits of electronic record systems","Easy access, Reduced paperwork, Data security, Accuracy, Efficient sharing"],
+    ["List 5 characteristics of a strong password","Length (8–12+ chars), Complexity (upper/lower/numbers/symbols), Unpredictability, Uniqueness (not reused), Regularly updated"],
+    ["List 5 ways to protect a computer system","Antivirus software, Firewall, Regular software updates, Strong passwords & 2FA, Regular data backups"],
+    ["Name 5 networking devices and their functions","Router (connects networks), Switch (connects LAN devices), Hub (broadcasts to all), Modem (converts signals), Access Point (provides Wi-Fi)"],
+    ["Name 5 wireless communication technologies","Wi-Fi, Bluetooth, 4G/5G, NFC, Satellite communication"],
+    ["List 5 causes of computer failure","Overheating, Power surges, Malware/virus infection, Hard drive failure, Human error"],
+    ["List 5 examples of storage devices","HDD, SSD, USB Flash Drive, Memory Card (SD Card), Optical Disc (CD/DVD/Blu-ray)"],
+    ["List 5 MS Office applications and their uses","Word (documents), Excel (spreadsheets), PowerPoint (presentations), Access (database), Outlook (email/scheduling)"],
+    ["List 5 causes of poor network connection","Distance from router, Network congestion, Faulty cables/hardware, Interference from other devices, Outdated network drivers"],
+    ["List 5 methods of online communication","Email, Instant messaging/chat, Video conferencing, Social media, VoIP"],
+    ["What command clears the DNS cache on Windows?","ipconfig /flushdns — run in Command Prompt as Administrator"],
+    ["List the steps to troubleshoot a computer that won't boot (any 4)","Check power supply; listen for beep codes; boot in Safe Mode; check/reseat hardware; use Startup Repair from Windows USB"],
+    ["What steps do you take when a system can't connect to internet? (any 4)","Isolate the problem; check physical connections; restart router/modem; run Network Troubleshooter; check IP/DNS settings; flush DNS & reset TCP/IP"],
+  ]
+};
+
+Object.entries(qGroups).forEach(([listId, qas]) => {
+  const list = document.getElementById(listId);
+  qas.forEach((qa, i) => {
+    const id = listId + '-' + i;
+    const div = document.createElement('div');
+    div.className = 'qa-item';
+    div.innerHTML = `<div class="qa-q" onclick="toggle('${id}')"><span>${qa[0]}</span><span class="qa-arrow" id="arr-${id}">▾</span></div><div class="qa-a" id="ans-${id}">${qa[1]}</div>`;
+    list.appendChild(div);
+  });
+});
+
+function toggle(id) {
+  const a = document.getElementById('ans-' + id);
+  const arr = document.getElementById('arr-' + id);
+  const open = a.classList.toggle('show');
+  arr.classList.toggle('open', open);
+}
+
+function revealAll() {
+  document.querySelectorAll('.qa-a').forEach(a => a.classList.add('show'));
+  document.querySelectorAll('.qa-arrow').forEach(a => a.classList.add('open'));
+}
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// Countdown
+const cd = document.getElementById('cd');
+const exam = new Date('2026-05-13T00:00:00');
+const now = new Date();
+const diff = Math.ceil((exam - now) / (1000 * 60 * 60 * 24));
+if (diff > 0) cd.textContent = `⏳ ${diff} day${diff === 1 ? '' : 's'} to exam`;
+else if (diff === 0) cd.textContent = '🎯 Exam is TODAY!';
+else cd.textContent = '✅ Exam done!';
+</script>
+</body>
+</html>
